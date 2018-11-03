@@ -1,12 +1,14 @@
 #[derive(Debug)]
-#[derive(Copy)]
+// #[derive(Copy)]
 pub struct Tile {
     pub id: usize,
     pub value: usize,
     pub row: usize,
     pub column: usize,
     pub old_row: isize,
-    pub old_column: isize
+    pub old_column: isize,
+    pub merged: bool,
+    pub merged_tiles: Vec<Tile>
 }
 
 impl Tile {
@@ -17,7 +19,9 @@ impl Tile {
             row: 0,
             column: 0,
             old_row: -1,
-            old_column: -1
+            old_column: -1,
+            merged: false,
+            merged_tiles: vec![]
         }
     }
 
@@ -39,7 +43,9 @@ impl Clone for Tile {
             row: self.row,
             column: self.column,
             old_row: self.old_row,
-            old_column: self.old_column
+            old_column: self.old_column,
+            merged: self.merged,
+            merged_tiles: self.merged_tiles.clone()
         }
     }
 }

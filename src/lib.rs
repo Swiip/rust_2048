@@ -1,6 +1,7 @@
 mod tile;
 mod board;
 mod add;
+mod move_tile;
 
 const DIMENSION: usize = 4;
 const FOOR_PROBABILITY: f32 = 0.2;

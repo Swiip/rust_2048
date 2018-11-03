@@ -24,6 +24,11 @@ impl Board {
             current_id: id
         }
     }
+
+    pub fn get_new_id(&mut self) -> usize {
+        self.current_id += 1;
+        self.current_id
+    }
 }
 
 #[cfg(test)]

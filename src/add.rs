@@ -1,4 +1,3 @@
-use super::DIMENSION;
 use super::FOOR_PROBABILITY;
 
 use board::Board;
@@ -21,7 +20,7 @@ fn update_tiles(board: &mut Board) {
     // println!("update {:?}", board);
 }
 
-fn choose_random_tile(board: &mut Board, random_position: f32, random_value: f32) {
+pub fn choose_random_tile(board: &mut Board, random_position: f32, random_value: f32) {
     // let empty_cells: Vec<(usize, usize, &Tile)> = board.grid
     //     .iter()
     //     .map(|line| line.iter().enumerate().collect::<Vec<(usize, &Tile)>>())
@@ -49,36 +48,6 @@ fn choose_random_tile(board: &mut Board, random_position: f32, random_value: f32
     // println!("choose {:?}", board);
 }
 
-fn get_dimension() -> Vec<usize> {
-    vec![0; DIMENSION]
-        .iter()
-        .enumerate()
-        .map(|(i, _)| i)
-        .collect()
-}
-
-fn rotate_left(board: &mut Board) {
-    let copy = board.grid.clone();
-
-    board.grid
-        .iter_mut()
-        .enumerate()
-        .for_each(|(x, line)| {
-            line
-                .iter_mut()
-                .enumerate()
-                .for_each(|(y, tile)| {
-                    tile.copy(&copy[y][DIMENSION - x - 1]);
-                })
-        });
-
-  // return board.map((row, rowIndex) => {
-  //   return row.map((cell, columnIndex) => {
-  //     return board[columnIndex][size - rowIndex - 1];
-  //   });
-  // });
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -104,15 +73,5 @@ mod tests {
         choose_random_tile(&mut board, 0.3, 0.4);
 
         assert_eq!(board.grid[1][0].value, 2);
-    }
-
-    #[test]
-    fn rotate_left_works() {
-        let mut board = Board::new();
-
-        choose_random_tile(&mut board, 0.3, 0.4);
-        rotate_left(&mut board);
-
-        assert_eq!(board.grid[3][1].value, 2);
     }
 }
