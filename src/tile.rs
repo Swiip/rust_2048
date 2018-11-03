@@ -1,5 +1,4 @@
 #[derive(Debug)]
-// #[derive(Copy)]
 pub struct Tile {
     pub id: usize,
     pub value: usize,

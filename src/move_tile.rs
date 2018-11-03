@@ -11,6 +11,24 @@ fn get_dimension() -> Vec<usize> {
         .collect()
 }
 
+fn times<F>(times: usize, mut f: F) where F: FnMut() {
+    for _ in 0..times {
+        f();
+    }
+}
+
+// 0 -> left, 1 -> up, 2 -> right, 3 -> down
+fn move_action(board: &mut Board, direction: usize) -> bool {
+    times(direction, || {
+        rotate_left(board);
+    });
+    let changed = move_left(board);
+    times(4 - direction, || {
+        rotate_left(board);
+    });
+    changed
+}
+
 fn rotate_left(board: &mut Board) {
     let copy = board.grid.clone();
 
@@ -115,5 +133,15 @@ mod tests {
         assert_eq!(board.grid[1][0].value, 4);
         assert_eq!(board.grid[1][1].value, 2);
         assert_eq!(changed, true);
+    }
+
+    #[test]
+    fn move_action_works() {
+        let mut board = Board::new();
+        board.grid[1][0].value = 2;
+
+        move_action(&mut board, 1);
+
+        assert_eq!(board.grid[0][0].value, 2);
     }
 }
