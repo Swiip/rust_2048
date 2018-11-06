@@ -1,4 +1,4 @@
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct Tile {
     pub id: usize,
     pub value: usize,

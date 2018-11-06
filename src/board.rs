@@ -2,7 +2,7 @@ use super::DIMENSION;
 
 use tile::Tile;
 
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct Board {
     pub current_id: usize,
     pub grid: Vec<Vec<Tile>>
